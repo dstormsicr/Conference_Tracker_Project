@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import ReportForm from './ReportForm';
+import ReportViewer from './ReportViewer';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <nav style={{ margin: 16 }}>
+        <Link to="/" style={{ marginRight: 16 }}>Build Report</Link>
+        <Link to="/report">View Report</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<ReportForm />} />
+        <Route
+          path="/report"
+          element={
+            <ReportViewer reportUrl="https://app.powerbi.com/reportEmbed?reportId=7166f64c-25ce-41f9-801b-612dcc4b69a3&autoAuth=true&ctid=b8df9d33-6263-4b33-b343-6d456add7e5f" />
+          }
+        />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
